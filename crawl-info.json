@@ -1,0 +1,11 @@
+{
+  "Blackrock": {
+    "selectors": {
+      "aum": "#keyFundFacts > div.product-data-list.data-points-en_US > div.float-left.in-left.col-totalNetAssets",
+      "ytm": "#fundamentalsAndRisk > div.product-data-list.data-points-en_US > div.float-left.in-right.col-yieldToWorst",
+      "premium": "#keyFundFacts > div.product-data-list.data-points-en_US > div.float-left.in-left.col-premiumDiscountPercent",
+      "dur": "#fundamentalsAndRisk > div.product-data-list.data-points-en_US > div.float-left.in-right.col-modelOad",
+      "wam": "#fundamentalsAndRisk > div.product-data-list.data-points-en_US > div.float-left.in-left.col-weightedAvgLife"
+    }
+  }
+}
