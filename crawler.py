@@ -9,20 +9,40 @@ def crawler(asset_manager, url):
         if r.status_code == 200:
             html = r.text
             soup = BeautifulSoup(html, "html.parser")
-            with open('./crawl-info.json', 'r') as f:
-                crawl_info_dic = json.load(f)
             if asset_manager == "Blackrock":
-                selector = crawl_info_dic["Blackrock"]["selectors"]                
+                with open('./crawl-info.json', 'r') as f:
+                    crawl_info_dic = json.load(f)
+                selector = crawl_info_dic["Blackrock"]["selectors"]
                 aum = soup.select(selector["aum"])[0].find("span",class_="data").string.strip()
                 aum_date = soup.select(selector["aum"])[0].find("span",class_="as-of-date").string
                 ytm = soup.select(selector["ytm"])[0].find("span",class_="data").string.strip()
                 ytm_date = soup.select(selector["ytm"])[0].find("span",class_="as-of-date").string
-
-                print(aum, aum_date, ytm, ytm_date)
-                # return aum
+                prem = soup.select(selector["prem"])[0].find("span",class_="data").string.strip()
+                prem_date = soup.select(selector["prem"])[0].find("span",class_="as-of-date").string
+                dur = soup.select(selector["dur"])[0].find("span",class_="data").string.strip()
+                dur_date = soup.select(selector["dur"])[0].find("span",class_="as-of-date").string
+                wam = soup.select(selector["wam"])[0].find("span",class_="data").string.strip()
+                wam_date = soup.select(selector["wam"])[0].find("span",class_="as-of-date").string
+                expr = soup.find("tr",class_="fee-code-expr").find("td",class_="data").string
+                result = {}
+                result["aum"] = aum
+                result["aum_date"] = aum_date
+                result["ytm"] = ytm
+                result["ytm_date"] = ytm_date
+                result["prem"] = prem
+                result["prem_date"] = prem_date
+                result["dur"] = dur
+                result["dur_date"] = dur_date
+                result["wam"] = wam
+                result["wam_date"] = wam_date
+                print(result)                                 
+                return result
             # elif asset_manager == "Invesco":
             #     ytm = soup.find_all("div",class_="widget gray-bg stacked")[3].find_all("span",class_="pull-right")[0].string.strip()
             #     return ytm
+            else:
+                print("Asset manager is not available")
+                pass
         else: 
             print("html page does not exist","\nErrorcode : ",r.status_code)
             pass
