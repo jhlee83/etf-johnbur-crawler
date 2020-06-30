@@ -37,17 +37,23 @@ def crawler(asset_manager, url):
                 result["wam_date"] = wam_date
                 print(result)                                 
                 return result
-            # elif asset_manager == "Invesco":
-            #     ytm = soup.find_all("div",class_="widget gray-bg stacked")[3].find_all("span",class_="pull-right")[0].string.strip()
-            #     return ytm
+            elif asset_manager == "Invesco":                
+                ytm = soup.find_all("div",class_="widget gray-bg stacked")[3].find_all("span",class_="pull-right")[0].string.strip()
+                ytm_wam_date = soup.find_all("div",class_="widget gray-bg stacked")[3].find_all("span",class_="asofdatetime")[0].string.strip()
+                wam = soup.find_all("div",class_="widget gray-bg stacked")[3].find_all("span",class_="pull-right")[1].string.strip()
+                expr = soup.find_all("div",class_="widget gray-bg stacked")[4].find_all("span",class_="pull-right")[10].string.strip()
+                expr_date = soup.find_all("div",class_="widget gray-bg stacked")[4].find_all("span",class_="asofdate")[0].string.strip()
+                aum = soup.find_all("div",class_="widget gray-bg stacked")[5].find_all("span",class_="pull-right")[9].string.strip()
+                aum_date = soup.find_all("div",class_="widget gray-bg stacked")[5].find_all("span",class_="asofdatetime")[0].string.strip()
+                print(ytm,wam,ytm_wam_date,expr,expr_date,aum,aum_date)
             else:
                 print("Asset manager is not available")
                 pass
         else: 
             print("html page does not exist","\nErrorcode : ",r.status_code)
             pass
-    except Error as e:
-        print(e)
+    except:
+        print("Error occured")
         pass
 
 if __name__ == "__main__":
