@@ -6,7 +6,7 @@ from google.cloud import firestore
 
 
 def main():
-    with open('./crawler/etfs-data-test.json', 'r') as f:
+    with open('./crawler/etfs-data.json', 'r') as f:
         etf_data_dic = json.load(f)
     etf_crawled_array = []
     for data in etf_data_dic["etfs"]:
@@ -14,7 +14,7 @@ def main():
         result_dict["result"] = crawler.crawler(
             data["asset_manager"], data["url"])
         etf_crawled_array.append(result_dict)
-        time.sleep(1)
+        time.sleep(3)
     etf_crawled_result = {
         "crawled_date": firestore.SERVER_TIMESTAMP}
     # "crawled_date": datetime.date.today().strftime('%Y-%m-%d')}

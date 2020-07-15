@@ -62,7 +62,6 @@ def crawler(asset_manager, url):
                 result["wam"] = wam
                 result["wam_date"] = wam_date
                 result["expr"] = expr
-                print(json.dumps(result))
                 return json.dumps(result)
             elif asset_manager == "Invesco":
                 ytm = float(soup.find_all("div", class_="widget gray-bg stacked")
